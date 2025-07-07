@@ -241,7 +241,6 @@
         <button id="btn-executores" class="tab-btn">Executores</button>
         <button id="btn-obfuscator" class="tab-btn">Obfuscator</button>
         <button id="btn-scripthub" class="tab-btn">ScriptHub</button>
-        <button id="btn-ai" class="tab-btn">Crie seu Script!</button>
       </div>
       <div class="content-area" id="content-area">
         <div class="welcome-box">
@@ -302,11 +301,8 @@
       }
 
       function obfuscateLua(code) {
-        // Remove comentários de linha simples
         let res = code.replace(/--.*$/gm, "");
-        // Remove linhas em branco
         res = res.replace(/^\s*[\r\n]/gm, "");
-        // Troca variáveis globais/comuns por nomes curtos (apenas exemplo)
         const mapVars = {};
         let varCount = 0;
         res = res.replace(/\b([a-zA-Z_][a-zA-Z0-9_]*)\b/g, function(match) {
@@ -376,78 +372,10 @@
         `;
       }
 
-      // --- IA Criadora de Script em Lua ---
-      function renderAICreator() {
-        setActiveTab("btn-ai");
-        contentArea.innerHTML = `
-          <form id="ai-form" autocomplete="off" style="width:100%;">
-            <label class="ai-label" for="ai-input">
-              Descreva o que você quer (ex: ""):
-            </label>
-            <textarea id="ai-input" class="ai-input" rows="4" placeholder="Explique o que você deseja que o script em Lua faça..."></textarea>
-            <button type="button" id="ai-generate" class="ls-copy-btn ai-btn">Gerar Script</button>
-            <div id="ai-loading" class="ai-loading" style="display:none;">Gerando script, aguarde...</div>
-            <div id="ai-error" class="ai-error" style="display:none;"></div>
-            <div id="ai-output" class="ai-output-area" style="margin-bottom:8px;min-height:60px;"></div>
-            <button type="button" id="ai-copy" class="ai-copy-btn">Copiar</button>
-          </form>
-        `;
-
-        const input = document.getElementById('ai-input');
-        const output = document.getElementById('ai-output');
-        const copyBtn = document.getElementById('ai-copy');
-        const genBtn = document.getElementById('ai-generate');
-        const loading = document.getElementById('ai-loading');
-        const errorBox = document.getElementById('ai-error');
-
-        // IA Simples local, só para demo (substitua por chamada real de IA se desejar)
-        function fakeAIGenerate(text) {
-          // Simples heurística para exemplos
-          if (!text.trim()) return "Descreva o que você deseja acima!";
-          if (text.toLowerCase().includes("teleport")) {
-            return '-- Script de Teleporte\nlocal player = game.Players.LocalPlayer\nplayer.Character:MoveTo(Vector3.new(0, 10, 0))\n';
-          }
-          if (text.toLowerCase().includes("mensagem")) {
-            return '-- Script de mensagem no chat\nlocal message = "Olá, mundo!"\ngame.StarterGui:SetCore("ChatMakeSystemMessage",{Text=message})\n';
-          }
-          if (text.toLowerCase().includes("speed") || text.toLowerCase().includes("velocidade")) {
-            return '-- Script para aumentar velocidade do jogador\nlocal player = game.Players.LocalPlayer\nplayer.Character.Humanoid.WalkSpeed = 100\n';
-          }
-          // Genérico
-          return '-- Script exemplo em Lua/Roblox\nprint("Seu script foi gerado. Edite conforme necessário!")\n';
-        }
-
-        genBtn.addEventListener('click', function() {
-          output.textContent = "";
-          errorBox.style.display = "none";
-          loading.style.display = "block";
-          setTimeout(() => {
-            try {
-              const script = fakeAIGenerate(input.value);
-              output.textContent = script;
-              loading.style.display = "none";
-            } catch (e) {
-              loading.style.display = "none";
-              errorBox.style.display = "block";
-              errorBox.textContent = "Erro ao gerar script.";
-            }
-          }, 900);
-        });
-
-        copyBtn.addEventListener('click', function() {
-          navigator.clipboard.writeText(output.textContent)
-            .then(() => {
-              copyBtn.textContent = 'Copiado!';
-              setTimeout(() => copyBtn.textContent = 'Copiar', 1200);
-            });
-        });
-      }
-
       document.getElementById('btn-loadstring').onclick = renderLoadString;
       document.getElementById('btn-executores').onclick = renderExecutores;
       document.getElementById('btn-obfuscator').onclick = renderObfuscator;
       document.getElementById('btn-scripthub').onclick = renderScriptHub;
-      document.getElementById('btn-ai').onclick = renderAICreator;
     </script>
   </body>
 </html>
