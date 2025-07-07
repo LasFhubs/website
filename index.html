@@ -74,10 +74,6 @@
         color: #ffbb3c;
         font-weight: bold;
       }
-      .portal {
-        color: #61ff90;
-        font-weight: bold;
-      }
       .author-tag {
         display: block;
         font-size: 1em;
@@ -87,13 +83,24 @@
         letter-spacing: 2px;
         text-shadow: 0 1px 8px #0007;
       }
-      .ls-label, .obf-label, .ai-label {
+      .rickmorty-reference {
+        margin-top: 120vh;
+        margin-bottom: 20px;
+        text-align: center;
+        color: #61ff90;
+        font-size: 1.03em;
+        opacity: 0.78;
+        font-style: italic;
+        pointer-events: none;
+        user-select: none;
+      }
+      .ls-label, .obf-label {
         margin-bottom: 14px;
         font-size: 1.08em;
         display: block;
         font-weight: 600;
       }
-      .ls-input, .obf-input, .ai-input {
+      .ls-input, .obf-input {
         width: 100%;
         padding: 12px;
         border-radius: 6px;
@@ -109,11 +116,11 @@
         box-shadow: 0 1px 3px #0002;
         transition: background 0.18s, box-shadow 0.18s;
       }
-      .ls-input:focus, .obf-input:focus, .ai-input:focus {
+      .ls-input:focus, .obf-input:focus {
         background: #2935e5;
         box-shadow: 0 2px 8px #2127c033;
       }
-      .ls-output-area, .obf-output-area, .ai-output-area {
+      .ls-output-area, .obf-output-area {
         background: #161726;
         border-radius: 6px;
         padding: 14px;
@@ -127,7 +134,7 @@
         white-space: pre-wrap;
         transition: box-shadow 0.18s;
       }
-      .ls-copy-btn, .obf-copy-btn, .ai-copy-btn {
+      .ls-copy-btn, .obf-copy-btn {
         background: linear-gradient(90deg, #2127c0 60%, #2935e5 100%);
         color: #fff;
         border: none;
@@ -141,7 +148,7 @@
         font-weight: 600;
         box-shadow: 0 1px 6px #0003;
       }
-      .ls-copy-btn:hover, .obf-copy-btn:hover, .ai-copy-btn:hover {
+      .ls-copy-btn:hover, .obf-copy-btn:hover {
         background: linear-gradient(90deg, #2935e5 80%, #2127c0 100%);
         box-shadow: 0 3px 12px #2127c044;
       }
@@ -198,22 +205,6 @@
         color: #bfcfff;
         font-size: 0.99em;
       }
-      .ai-btn {
-        margin-left: 0;
-        margin-top: 5px;
-      }
-      .ai-loading {
-        color: #ffc107;
-        font-size: 1.03em;
-        margin-top: 8px;
-        font-style: italic;
-      }
-      .ai-error {
-        color: #ff4444;
-        font-size: 1.03em;
-        margin-top: 8px;
-        font-style: italic;
-      }
       @media (max-width: 700px) {
         .content-area {
           width: 97vw;
@@ -226,6 +217,9 @@
         .scripthub-card {
           width: 100%;
           padding: 12px 8px;
+        }
+        .rickmorty-reference {
+          font-size: 0.98em;
         }
       }
       ::selection {
@@ -246,14 +240,18 @@
         <div class="welcome-box">
           <span class="flintstone">YABBA DABBA DOO!</span> Bem-vindo ao mundo dos scripts, direto de Bedrock para o multiverso! 
           <br><br>
-          Aqui você pode criar, obfuscar e explorar scripts como um verdadeiro inventor das cavernas, ou até viajar pelos portais do <span class="portal">Rick and Morty</span> para encontrar soluções que nem o Rick imaginaria!
-          <br><br>
-          Não importa se seu script vai rodar no troncomóvel ou em um portal interdimensional: divirta-se e use com criatividade! 
+          Aqui você pode criar, obfuscar e explorar scripts como um verdadeiro inventor das cavernas.
           <br>
-          <span style="font-size:0.93em;color:#bfcfff;font-style:italic;">(Se der bug, culpe o Dino ou o Morty, nunca o Fred ou o Rick!)</span>
+          <span style="font-size:0.93em;color:#bfcfff;font-style:italic;">(Se der bug, culpe o Dino, nunca o Fred!)</span>
           <span class="author-tag">LasF Hub</span>
         </div>
       </div>
+    </div>
+    <div class="rickmorty-reference">
+      <span>
+        <span style="font-size:1.2em;">🌀</span>
+        Portais interdimensionais? Só depois do scroll! Wubba Lubba Dub Dub!
+      </span>
     </div>
     <script>
       const contentArea = document.getElementById('content-area');
