@@ -4,88 +4,146 @@
     <meta charset="UTF-8" />
     <title>Ferramentas de Scripts</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link href="https://fonts.googleapis.com/css?family=Fira+Mono:400,700|Montserrat:400,700&display=swap" rel="stylesheet">
     <style>
       body {
-        font-family: Arial, sans-serif;
-        background: #1e1e1e;
+        font-family: 'Montserrat', Arial, sans-serif;
+        background: radial-gradient(ellipse at top left, #2328c0 0%, #181a37 100%);
         color: #fafafa;
         margin: 0;
         padding: 0;
+        min-height: 100vh;
       }
       .container {
         display: flex;
         flex-direction: column;
         align-items: center;
-        margin-top: 60px;
+        margin-top: 50px;
+        min-height: 100vh;
       }
       .buttons {
         display: flex;
-        gap: 20px;
+        gap: 18px;
         margin-bottom: 40px;
+        flex-wrap: wrap;
       }
-      button {
-        background: #2127c0;
+      button, .tab-btn {
+        background: linear-gradient(90deg, #2127c0 60%, #2935e5 100%);
         color: #fff;
         border: none;
-        border-radius: 8px;
-        padding: 18px 32px;
+        border-radius: 10px;
+        padding: 15px 30px;
         font-size: 1.1em;
+        font-family: 'Montserrat', Arial, sans-serif;
+        font-weight: 600;
         cursor: pointer;
-        transition: background 0.2s;
+        transition: background 0.22s, box-shadow 0.22s;
+        box-shadow: 0 2px 8px #0002;
+        outline: none;
       }
-      button:hover {
-        background: #424be5;
+      button:hover, .tab-btn.active {
+        background: linear-gradient(90deg, #2935e5 80%, #2127c0 100%);
+        box-shadow: 0 4px 16px #2127c066;
       }
       .content-area {
-        min-height: 220px;
-        width: 400px;
-        background: #232323;
-        border-radius: 10px;
-        padding: 32px;
-        box-shadow: 0 4px 16px #0004;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 1.15em;
+        min-height: 280px;
+        width: 440px;
+        background: rgba(35, 35, 45, 0.97);
+        border-radius: 18px;
+        padding: 38px 28px;
+        box-shadow: 0 6px 32px #181a37cc;
+        font-size: 1.16em;
+        transition: box-shadow 0.2s;
+        margin-bottom: 48px;
+        position: relative;
+        z-index: 1;
+        overflow: hidden;
       }
-      .hidden { display: none; }
-      .ls-label, .obf-label {
-        margin-bottom: 12px;
+      .welcome-box {
+        background: #181a37cc;
+        border-radius: 12px;
+        padding: 32px 26px 22px 26px;
+        box-shadow: 0 2px 16px #2127c055;
+        margin-bottom: 10px;
+        width: 100%;
+        text-align: center;
+        font-size: 1.32em;
+        position: relative;
+      }
+      .flintstone {
+        color: #ffbb3c;
+        font-weight: bold;
+      }
+      .portal {
+        color: #61ff90;
+        font-weight: bold;
+      }
+      .author-tag {
+        display: block;
+        font-size: 1em;
+        color: #6eb0ff;
+        font-weight: 700;
+        margin-top: 18px;
+        letter-spacing: 2px;
+        text-shadow: 0 1px 8px #0007;
+      }
+      .ls-label, .obf-label, .ai-label {
+        margin-bottom: 14px;
         font-size: 1.08em;
         display: block;
+        font-weight: 600;
       }
-      .ls-input, .obf-input {
+      .ls-input, .obf-input, .ai-input {
         width: 100%;
-        padding: 10px;
-        border-radius: 5px;
+        padding: 12px;
+        border-radius: 6px;
         border: none;
         font-size: 1em;
-        margin-bottom: 16px;
+        margin-bottom: 18px;
         box-sizing: border-box;
         resize: vertical;
+        background: #232862;
+        color: #fff;
+        font-family: 'Fira Mono', monospace;
+        outline: none;
+        box-shadow: 0 1px 3px #0002;
+        transition: background 0.18s, box-shadow 0.18s;
       }
-      .ls-output-area, .obf-output-area {
-        background: #181818;
+      .ls-input:focus, .obf-input:focus, .ai-input:focus {
+        background: #2935e5;
+        box-shadow: 0 2px 8px #2127c033;
+      }
+      .ls-output-area, .obf-output-area, .ai-output-area {
+        background: #161726;
         border-radius: 6px;
-        padding: 12px;
-        font-family: "Fira Mono", "Consolas", monospace;
+        padding: 14px;
+        font-family: 'Fira Mono', 'Consolas', monospace;
         color: #2127c0;
         word-break: break-all;
-        min-height: 60px;
+        min-height: 62px;
+        font-size: 1.09em;
+        margin-bottom: 10px;
+        box-shadow: 0 1px 6px #0003;
+        white-space: pre-wrap;
+        transition: box-shadow 0.18s;
       }
-      .ls-copy-btn, .obf-copy-btn {
-        background: #2127c0;
+      .ls-copy-btn, .obf-copy-btn, .ai-copy-btn {
+        background: linear-gradient(90deg, #2127c0 60%, #2935e5 100%);
         color: #fff;
         border: none;
-        padding: 7px 16px;
+        padding: 8px 19px;
         font-size: 1em;
-        border-radius: 5px;
+        border-radius: 6px;
         cursor: pointer;
-        margin-top: 12px;
-        transition: background 0.2s;
+        margin-top: 8px;
+        transition: background 0.18s, box-shadow 0.18s;
+        font-family: 'Montserrat', Arial, sans-serif;
+        font-weight: 600;
+        box-shadow: 0 1px 6px #0003;
       }
-      .ls-copy-btn:hover, .obf-copy-btn:hover {
-        background: #424be5;
+      .ls-copy-btn:hover, .obf-copy-btn:hover, .ai-copy-btn:hover {
+        background: linear-gradient(90deg, #2935e5 80%, #2127c0 100%);
+        box-shadow: 0 3px 12px #2127c044;
       }
       .executores-soon {
         color: #2127c0;
@@ -109,59 +167,106 @@
         align-items: center;
       }
       .scripthub-card {
-        background: #181a37;
-        border-radius: 8px;
+        background: #181a37cc;
+        border-radius: 10px;
         padding: 18px 20px;
-        width: 90%;
-        box-shadow: 0 2px 6px #0003;
+        width: 92%;
+        box-shadow: 0 2px 12px #2127c022;
         display: flex;
         flex-direction: column;
         align-items: flex-start;
+        border: 2px solid #2630b5;
+        transition: box-shadow 0.18s, border-color 0.18s;
+      }
+      .scripthub-card:hover {
+        border-color: #424be5;
+        box-shadow: 0 4px 22px #2127c055;
       }
       .scripthub-link {
         text-decoration: none;
         color: #fff;
         font-weight: bold;
-        font-size: 1.12em;
-        margin-bottom: 6px;
+        font-size: 1.16em;
+        margin-bottom: 8px;
         word-break: break-all;
+        transition: color 0.18s;
+      }
+      .scripthub-link:hover {
+        color: #90a2ff;
       }
       .scripthub-desc {
         color: #bfcfff;
-        font-size: 0.97em;
+        font-size: 0.99em;
       }
-      @media (max-width: 600px) {
+      .ai-btn {
+        margin-left: 0;
+        margin-top: 5px;
+      }
+      .ai-loading {
+        color: #ffc107;
+        font-size: 1.03em;
+        margin-top: 8px;
+        font-style: italic;
+      }
+      .ai-error {
+        color: #ff4444;
+        font-size: 1.03em;
+        margin-top: 8px;
+        font-style: italic;
+      }
+      @media (max-width: 700px) {
         .content-area {
-          width: 90vw;
-          padding: 16px;
+          width: 97vw;
+          padding: 18px 6vw;
         }
         .buttons {
           flex-direction: column;
-          gap: 12px;
+          gap: 10px;
         }
         .scripthub-card {
           width: 100%;
           padding: 12px 8px;
         }
       }
+      ::selection {
+        background: #2935e5;
+        color: #fff;
+      }
     </style>
   </head>
   <body>
     <div class="container">
       <div class="buttons">
-        <button id="btn-loadstring">LoadString</button>
-        <button id="btn-executores">Executores</button>
-        <button id="btn-obfuscator">Obfuscator</button>
-        <button id="btn-scripthub">ScriptHub</button>
+        <button id="btn-loadstring" class="tab-btn active">LoadString</button>
+        <button id="btn-executores" class="tab-btn">Executores</button>
+        <button id="btn-obfuscator" class="tab-btn">Obfuscator</button>
+        <button id="btn-scripthub" class="tab-btn">ScriptHub</button>
+        <button id="btn-ai" class="tab-btn">Crie seu Script!</button>
       </div>
       <div class="content-area" id="content-area">
-        Clique em um dos botões acima para começar.
+        <div class="welcome-box">
+          <span class="flintstone">YABBA DABBA DOO!</span> Bem-vindo ao mundo dos scripts, direto de Bedrock para o multiverso! 
+          <br><br>
+          Aqui você pode criar, obfuscar e explorar scripts como um verdadeiro inventor das cavernas, ou até viajar pelos portais do <span class="portal">Rick and Morty</span> para encontrar soluções que nem o Rick imaginaria!
+          <br><br>
+          Não importa se seu script vai rodar no troncomóvel ou em um portal interdimensional: divirta-se e use com criatividade! 
+          <br>
+          <span style="font-size:0.93em;color:#bfcfff;font-style:italic;">(Se der bug, culpe o Dino ou o Morty, nunca o Fred ou o Rick!)</span>
+          <span class="author-tag">LasfHub</span>
+        </div>
       </div>
     </div>
     <script>
       const contentArea = document.getElementById('content-area');
+      const tabBtns = document.querySelectorAll(".tab-btn");
+
+      function setActiveTab(btnId) {
+        tabBtns.forEach(btn => btn.classList.remove("active"));
+        document.getElementById(btnId).classList.add("active");
+      }
 
       function renderLoadString() {
+        setActiveTab("btn-loadstring");
         contentArea.innerHTML = `
           <form id="ls-form" autocomplete="off" style="width: 100%;">
             <label class="ls-label" for="ls-input">
@@ -192,6 +297,7 @@
       }
 
       function renderExecutores() {
+        setActiveTab("btn-executores");
         contentArea.innerHTML = `<div class="executores-soon">Em breve!</div>`;
       }
 
@@ -220,6 +326,7 @@
       }
 
       function renderObfuscator() {
+        setActiveTab("btn-obfuscator");
         contentArea.innerHTML = `
           <form id="obf-form" autocomplete="off" style="width: 100%;">
             <span class="obf-warning">Talvez não funcione com alguns códigos :\\</span>
@@ -250,6 +357,7 @@
       }
 
       function renderScriptHub() {
+        setActiveTab("btn-scripthub");
         contentArea.innerHTML = `
           <div class="scripthub-links">
             <div class="scripthub-card">
@@ -268,10 +376,78 @@
         `;
       }
 
+      // --- IA Criadora de Script em Lua ---
+      function renderAICreator() {
+        setActiveTab("btn-ai");
+        contentArea.innerHTML = `
+          <form id="ai-form" autocomplete="off" style="width:100%;">
+            <label class="ai-label" for="ai-input">
+              Descreva o que você quer (ex: "um script de teleportar o player para coordenadas X Y Z"):
+            </label>
+            <textarea id="ai-input" class="ai-input" rows="4" placeholder="Explique o que você deseja que o script em Lua faça..."></textarea>
+            <button type="button" id="ai-generate" class="ls-copy-btn ai-btn">Gerar Script</button>
+            <div id="ai-loading" class="ai-loading" style="display:none;">Gerando script, aguarde...</div>
+            <div id="ai-error" class="ai-error" style="display:none;"></div>
+            <div id="ai-output" class="ai-output-area" style="margin-bottom:8px;min-height:60px;"></div>
+            <button type="button" id="ai-copy" class="ai-copy-btn">Copiar</button>
+          </form>
+        `;
+
+        const input = document.getElementById('ai-input');
+        const output = document.getElementById('ai-output');
+        const copyBtn = document.getElementById('ai-copy');
+        const genBtn = document.getElementById('ai-generate');
+        const loading = document.getElementById('ai-loading');
+        const errorBox = document.getElementById('ai-error');
+
+        // IA Simples local, só para demo (substitua por chamada real de IA se desejar)
+        function fakeAIGenerate(text) {
+          // Simples heurística para exemplos
+          if (!text.trim()) return "Descreva o que você deseja acima!";
+          if (text.toLowerCase().includes("teleport")) {
+            return '-- Script de Teleporte\nlocal player = game.Players.LocalPlayer\nplayer.Character:MoveTo(Vector3.new(0, 10, 0))\n';
+          }
+          if (text.toLowerCase().includes("mensagem")) {
+            return '-- Script de mensagem no chat\nlocal message = "Olá, mundo!"\ngame.StarterGui:SetCore("ChatMakeSystemMessage",{Text=message})\n';
+          }
+          if (text.toLowerCase().includes("speed") || text.toLowerCase().includes("velocidade")) {
+            return '-- Script para aumentar velocidade do jogador\nlocal player = game.Players.LocalPlayer\nplayer.Character.Humanoid.WalkSpeed = 100\n';
+          }
+          // Genérico
+          return '-- Script exemplo em Lua/Roblox\nprint("Seu script foi gerado. Edite conforme necessário!")\n';
+        }
+
+        genBtn.addEventListener('click', function() {
+          output.textContent = "";
+          errorBox.style.display = "none";
+          loading.style.display = "block";
+          setTimeout(() => {
+            try {
+              const script = fakeAIGenerate(input.value);
+              output.textContent = script;
+              loading.style.display = "none";
+            } catch (e) {
+              loading.style.display = "none";
+              errorBox.style.display = "block";
+              errorBox.textContent = "Erro ao gerar script.";
+            }
+          }, 900);
+        });
+
+        copyBtn.addEventListener('click', function() {
+          navigator.clipboard.writeText(output.textContent)
+            .then(() => {
+              copyBtn.textContent = 'Copiado!';
+              setTimeout(() => copyBtn.textContent = 'Copiar', 1200);
+            });
+        });
+      }
+
       document.getElementById('btn-loadstring').onclick = renderLoadString;
       document.getElementById('btn-executores').onclick = renderExecutores;
       document.getElementById('btn-obfuscator').onclick = renderObfuscator;
       document.getElementById('btn-scripthub').onclick = renderScriptHub;
+      document.getElementById('btn-ai').onclick = renderAICreator;
     </script>
   </body>
 </html>
