@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <title>LasF Hub ScriptHub</title>
+  <title>LasF Hub</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <link href="https://fonts.googleapis.com/css?family=Fira+Mono:400,700|Montserrat:400,700&display=swap" rel="stylesheet">
   <style>
@@ -26,7 +26,7 @@
       min-height: 100vh;
     }
     .shub-container {
-      max-width: 880px;
+      max-width: 900px;
       margin: 34px auto 40px auto;
       background: var(--surface);
       border-radius: 24px;
@@ -169,8 +169,8 @@
   <div class="shub-container">
     <div class="shub-title">LasF Hub ScriptHub Unificado</div>
     <div class="shub-desc">
-      Busque scripts Roblox de <b>R-Scripts</b>, <b>RBXScript</b> e <b>ScriptBlox</b> em um só lugar. <br>
-      <span style="font-size:0.99em;">Pesquisa e resultado em tempo real (exemplo demonstrativo).</span>
+      Busque scripts Roblox de <b>R-Scripts</b>, <b>RBXScript</b> e <b>ScriptBlox</b> em um só lugar.<br>
+      <span style="font-size:0.99em;">Digite o nome do jogo/script e clique em buscar.</span>
     </div>
     <div class="shub-search-row">
       <input class="shub-input" id="shub-search" placeholder="Digite o nome do script ou jogo..." />
@@ -266,11 +266,8 @@
     };
 
     document.getElementById('shub-search').addEventListener('keyup', (e) => {
-      if (e.key === 'Enter') {
-        renderResults(searchScripts(e.target.value));
-      }
+      renderResults(searchScripts(e.target.value));
     });
-
   </script>
 </body>
 </html>
