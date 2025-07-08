@@ -2,7 +2,7 @@
 <html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
-    <title>LasF HUB</title></title>
+    <title>Ferramentas de Scripts</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <link href="https://fonts.googleapis.com/css?family=Fira+Mono:400,700|Montserrat:400,700&display=swap" rel="stylesheet">
     <style>
@@ -178,50 +178,153 @@
         text-align: left;
         display: block;
       }
+      /* NOVO: Melhor grid para ScriptHub */
       .scripthub-links {
         display: flex;
-        flex-direction: column;
-        gap: 18px;
+        flex-direction: row;
+        gap: 22px;
         width: 100%;
-        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin-top: 10px;
       }
       .scripthub-card {
-        background: #181a37cc;
-        border-radius: 10px;
-        padding: 18px 20px;
-        width: 92%;
-        box-shadow: 0 2px 12px #2127c022;
+        background: #181a37ee;
+        border-radius: 14px;
+        padding: 22px 24px 18px 24px;
+        width: 260px;
+        box-shadow: 0 2px 16px #2127c044;
         display: flex;
         flex-direction: column;
         align-items: flex-start;
         border: 2px solid #2630b5;
         transition: box-shadow 0.18s, border-color 0.18s;
+        margin-bottom: 18px;
+        min-height: 195px;
+        position: relative;
       }
       .scripthub-card:hover {
         border-color: #424be5;
-        box-shadow: 0 4px 22px #2127c055;
+        box-shadow: 0 6px 28px #2127c077;
+        z-index: 2;
       }
       .scripthub-link {
         text-decoration: none;
         color: #fff;
         font-weight: bold;
-        font-size: 1.16em;
-        margin-bottom: 8px;
+        font-size: 1.22em;
+        margin-bottom: 12px;
         word-break: break-all;
         transition: color 0.18s;
+        display: flex;
+        align-items: center;
       }
-      .scripthub-link:hover {
-        color: #90a2ff;
+      .scripthub-link::before {
+        content: "🔗";
+        margin-right: 7px;
+        font-size: 1.04em;
+        opacity: 0.7;
       }
       .scripthub-desc {
         color: #bfcfff;
-        font-size: 0.99em;
+        font-size: 1.04em;
+        margin-bottom: 18px;
+        flex: 1 1 auto;
+      }
+      .scripthub-btn {
+        margin-top: auto;
+        align-self: flex-end;
+        background: linear-gradient(90deg, #2935e5 70%, #2127c0 100%);
+        color: #fff;
+        border: none;
+        padding: 8px 18px;
+        border-radius: 7px;
+        font-size: 1.05em;
+        font-weight: 600;
+        cursor: pointer;
+        box-shadow: 0 1px 8px #0003;
+        transition: background 0.16s, box-shadow 0.16s;
+      }
+      .scripthub-btn:hover {
+        background: linear-gradient(90deg, #2127c0 80%, #2935e5 100%);
+        box-shadow: 0 3px 12px #2127c055;
+      }
+      .scripthub-details {
+        display: none;
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        min-height: 100%;
+        border-radius: 14px;
+        background: #232862fa;
+        color: #fff;
+        padding: 24px;
+        z-index: 10;
+        box-shadow: 0 6px 32px #2935e5cc;
+        flex-direction: column;
+        align-items: flex-start;
+        animation: fadeIn 0.23s;
+      }
+      .scripthub-details.active {
+        display: flex;
+      }
+      .scripthub-details-title {
+        font-size: 1.22em;
+        font-weight: 700;
+        margin-bottom: 8px;
+        color: #90a2ff;
+      }
+      .scripthub-details-desc {
+        font-size: 1.08em;
+        color: #e0eaff;
+        margin-bottom: 15px;
+      }
+      .scripthub-details-link {
+        color: #fff;
+        font-weight: bold;
+        text-decoration: underline;
+        font-size: 1.08em;
+        margin-bottom: 18px;
+        display: inline-block;
+      }
+      .scripthub-details-close {
+        margin-top: auto;
+        align-self: flex-end;
+        background: #2328c0;
+        color: #fff;
+        border: none;
+        border-radius: 6px;
+        padding: 7px 16px;
+        font-size: 1em;
+        font-weight: 600;
+        cursor: pointer;
+        box-shadow: 0 1px 8px #0002;
+        transition: background 0.16s, box-shadow 0.16s;
+      }
+      .scripthub-details-close:hover {
+        background: #2935e5;
+        box-shadow: 0 3px 12px #2127c044;
+      }
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(16px);}
+        to { opacity: 1; transform: none;}
+      }
+      @media (max-width: 800px) {
+        .content-area {
+          width: 98vw;
+          padding: 18px 2vw;
+        }
+        .scripthub-links {
+          flex-direction: column;
+          gap: 14px;
+        }
+        .scripthub-card {
+          width: 98%;
+          min-width: 180px;
+        }
       }
       @media (max-width: 700px) {
-        .content-area {
-          width: 97vw;
-          padding: 18px 6vw;
-        }
         .welcome-box {
           padding: 12px 6vw 10px 6vw;
         }
@@ -230,7 +333,7 @@
           gap: 10px;
         }
         .scripthub-card {
-          width: 100%;
+          width: 99%;
           padding: 12px 8px;
         }
         .rickmorty-reference {
@@ -369,24 +472,88 @@
         });
       }
 
+      // NOVO: ScriptHub remodelado
       function renderScriptHub() {
         setActiveTab("btn-scripthub");
         contentArea.innerHTML = `
           <div class="scripthub-links">
-            <div class="scripthub-card">
+            <div class="scripthub-card" data-site="rscripts">
               <a class="scripthub-link" href="https://rscripts.net/" target="_blank">R-Scripts</a>
-              <span class="scripthub-desc">Biblioteca online de scripts para Roblox.</span>
+              <span class="scripthub-desc">Uma das maiores bibliotecas de scripts para Roblox. Aqui você encontra scripts atualizados para vários jogos, com avaliações da comunidade e fácil pesquisa.</span>
+              <button class="scripthub-btn">Ver Detalhes</button>
+              <div class="scripthub-details">
+                <span class="scripthub-details-title">R-Scripts</span>
+                <span class="scripthub-details-desc">
+                  O <b>R-Scripts</b> oferece uma vasta coleção de scripts para Roblox, organizados por jogos, popularidade e data de atualização. O site permite que usuários avaliem scripts, comentem e compartilhem feedback, além de mostrar os scripts mais usados do momento.
+                  <br><br>
+                  <b>Destaques:</b>
+                  <ul>
+                    <li>Filtro por jogo e categoria</li>
+                    <li>Scripts verificados e atualizados</li>
+                    <li>Comunidade ativa</li>
+                  </ul>
+                </span>
+                <a href="https://rscripts.net/" target="_blank" class="scripthub-details-link">Acessar R-Scripts</a>
+                <button class="scripthub-details-close">Fechar</button>
+              </div>
             </div>
-            <div class="scripthub-card">
+            <div class="scripthub-card" data-site="rbxscript">
               <a class="scripthub-link" href="https://rbxscript.com/" target="_blank">RBXScript</a>
-              <span class="scripthub-desc">Scripts, utilidades e recursos para Roblox.</span>
+              <span class="scripthub-desc">Scripts, utilitários, tutoriais e novidades. Ideal para quem quer aprender mais e baixar scripts prontos para Roblox.</span>
+              <button class="scripthub-btn">Ver Detalhes</button>
+              <div class="scripthub-details">
+                <span class="scripthub-details-title">RBXScript</span>
+                <span class="scripthub-details-desc">
+                  O <b>RBXScript</b> se destaca não só por sua ampla lista de scripts, mas também por oferecer tutoriais, notícias e ferramentas para desenvolvedores. É um portal completo para iniciantes e experientes.
+                  <br><br>
+                  <b>Destaques:</b>
+                  <ul>
+                    <li>Área de tutoriais e dicas</li>
+                    <li>Novidades e atualizações do Roblox</li>
+                    <li>Scripts organizados por tipo e utilidade</li>
+                  </ul>
+                </span>
+                <a href="https://rbxscript.com/" target="_blank" class="scripthub-details-link">Acessar RBXScript</a>
+                <button class="scripthub-details-close">Fechar</button>
+              </div>
             </div>
-            <div class="scripthub-card">
+            <div class="scripthub-card" data-site="scriptblox">
               <a class="scripthub-link" href="https://scriptblox.com/" target="_blank">ScriptBlox</a>
-              <span class="scripthub-desc">Plataforma para compartilhar e encontrar scripts de Roblox.</span>
+              <span class="scripthub-desc">Plataforma moderna para compartilhar, buscar e avaliar scripts, com interface amigável e recursos sociais.</span>
+              <button class="scripthub-btn">Ver Detalhes</button>
+              <div class="scripthub-details">
+                <span class="scripthub-details-title">ScriptBlox</span>
+                <span class="scripthub-details-desc">
+                  O <b>ScriptBlox</b> aposta em uma interface intuitiva e recursos de comunidade, permitindo que usuários publiquem, curtam e comentem scripts. O sistema de busca é eficiente e destaca scripts populares e recentes.
+                  <br><br>
+                  <b>Destaques:</b>
+                  <ul>
+                    <li>Interface moderna e fácil de navegar</li>
+                    <li>Recursos sociais: comentários, likes e perfis</li>
+                    <li>Scripts em destaque e busca avançada</li>
+                  </ul>
+                </span>
+                <a href="https://scriptblox.com/" target="_blank" class="scripthub-details-link">Acessar ScriptBlox</a>
+                <button class="scripthub-details-close">Fechar</button>
+              </div>
             </div>
           </div>
         `;
+
+        // Script para abrir/fechar detalhes
+        const cards = contentArea.querySelectorAll('.scripthub-card');
+        cards.forEach(card => {
+          const btn = card.querySelector('.scripthub-btn');
+          const details = card.querySelector('.scripthub-details');
+          const closeBtn = card.querySelector('.scripthub-details-close');
+          btn.addEventListener('click', () => {
+            cards.forEach(c => c.querySelector('.scripthub-details').classList.remove('active'));
+            details.classList.add('active');
+          });
+          closeBtn.addEventListener('click', () => {
+            details.classList.remove('active');
+          });
+        });
       }
 
       document.getElementById('btn-loadstring').onclick = renderLoadString;
