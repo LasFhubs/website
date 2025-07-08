@@ -421,6 +421,11 @@
         });
       }
 
+      function renderExecutores() {
+        setActiveTab("btn-executores");
+        contentArea.innerHTML = `<div class="executores-soon">Em breve!</div>`;
+      }
+
       function advancedObfuscateLua(luaCode) {
         // Remove comentários
         let code = luaCode.replace(/--.*$/gm, "");
